@@ -1,0 +1,33 @@
+body {
+    background-color: #ccc;
+}
+.parent {
+    height: 600px;
+    width: 250px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
+.scroll-ul {
+    list-style-type: none;
+    overflow-y: scroll;
+    max-height: 550px;
+}
+
+.scroll-li {
+    height: 150px;
+    width: 150px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.scroll-img {
+    height: 150px;
+    border-radius: 5px;
+}
+
+.loader {
+    margin-left: 120px;
+    display:none;
+}
