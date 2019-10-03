@@ -18,9 +18,9 @@ function loadData() {
     const scrollUl = document.getElementById("scrollUl");
     const loader = document.querySelector(".loader");
     loader.style.display = "block";
-
     fakeapi()
         .then(resp => {
+            const frag = document.createDocumentFragment();
             for (let r of resp) {
                 const li = document.createElement('li');
                 li.classList.add("scroll-li");
@@ -30,8 +30,9 @@ function loadData() {
                 img.classList.add("scroll-img");
 
                 li.appendChild(img);
-                scrollUl.appendChild(li);
+                frag.appendChild(li);
             }
+            scrollUl.append(frag);
             loader.style.display = "none";
         });
 }
@@ -46,11 +47,23 @@ function load() {
 
     scrollUl.addEventListener("scroll", function(event) {
         if (scrollUl.scrollTop + scrollUl.clientHeight >= scrollUl.scrollHeight) {
-            loadData();
+            throttle(loadData, 2000)();
         }
     });
 
     loadData();
+}
+
+function throttle(func, interval) {
+    return (...args) => {
+        let prevTime = this.now;
+        this.now = +new Date();
+
+        if (!prevTime || now - prevTime >= interval) {
+            func(...args);
+            prevTime = now;
+        }
+    }
 }
 
 document.addEventListener("DOMContentLoaded", load);
