@@ -59,7 +59,7 @@ function throttle(func, interval) {
         let prevTime = this.now;
         this.now = +new Date();
 
-        if (!prevTime || now - prevTime >= interval) {
+        if (!prevTime || this.now - prevTime >= interval) {
             func(...args);
             prevTime = now;
         }
